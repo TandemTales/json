@@ -1,10 +1,10 @@
-#include "template.h"
+#include "json.h"
 
-using namespace stk;
+using namespace tt;
 
 int main()
 {
-	c_template tpl;
-	tpl.go_template();
+	c_json json;
+	json.go_json();
 	return 0;
 }
