@@ -29,6 +29,15 @@ CPMAddPackage("gh:TheLartians/PackageProject.cmake@1.8.0")
 #	GIT_TAG main
 #)
 
+# Add nlohmann/json package
+CPMAddPackage(
+  NAME nlohmann_json
+  VERSION 3.11.3
+  GITHUB_REPOSITORY nlohmann/json
+  OPTIONS
+    "JSON_BuildTests OFF"
+)
+
 # ---- Add source files ----
 file(GLOB_RECURSE sources CONFIGURE_DEPENDS 
   "${CMAKE_CURRENT_SOURCE_DIR}/source/*.h"
@@ -39,6 +48,14 @@ file(GLOB_RECURSE sources CONFIGURE_DEPENDS
 
 # ---- Create library ----
 add_library(${PROJECT_NAME} ${headers} ${sources})
+
+if(MSVC)
+    target_compile_options(${PROJECT_NAME} PRIVATE
+        $<$<CONFIG:Debug>:/MTd>
+        $<$<CONFIG:Release>:/MT>
+    )
+endif()
+
 set_target_properties(${PROJECT_NAME} PROPERTIES CXX_STANDARD 20)
 
 target_include_directories(
@@ -49,6 +66,8 @@ target_include_directories(
 
 # Example link library:
 #target_link_libraries(${PROJECT_NAME} hash)
+
+target_link_libraries(${PROJECT_NAME} nlohmann_json::nlohmann_json)
 
 # This line will create a folder hierarchy in the Visual Studio solution explorer
 # that matches the directory structure under ${CMAKE_CURRENT_SOURCE_DIR}/source.
