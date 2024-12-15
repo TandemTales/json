@@ -15,26 +15,29 @@ int main()
 		logln("json file test.json failed to load");
 	}
 
-	logln("bedoop size: {}", json["bedoop"].size());
-	for (c_json const& obj : json["bedoop"])
+	if (json["bedoop"].is_array())
 	{
-		if (obj.is_string())
+		logln("bedoop size: {}", json["bedoop"].size());
+		for (c_json const& obj : json["bedoop"])
 		{
-			logln("bedoop: {}", obj.get<std::string>());
-		}
-		else if (obj.is_number())
-		{
-			if (obj.is_number_integer())
+			if (obj.is_string())
 			{
-				logln("bedoop: {}", obj.get<int64_t>());
+				logln("bedoop: {}", obj.get<std::string>());
 			}
-			else if (obj.is_number_unsigned())
+			else if (obj.is_number())
 			{
-				logln("bedoop: {}", obj.get<uint64_t>());
-			}
-			else if (obj.is_number_float())
-			{
-				logln("bedoop: {}", obj.get<double>());
+				if (obj.is_number_integer())
+				{
+					logln("bedoop: {}", obj.get<int64_t>());
+				}
+				else if (obj.is_number_unsigned())
+				{
+					logln("bedoop: {}", obj.get<uint64_t>());
+				}
+				else if (obj.is_number_float())
+				{
+					logln("bedoop: {}", obj.get<double>());
+				}
 			}
 		}
 	}

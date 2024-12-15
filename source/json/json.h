@@ -56,13 +56,15 @@ namespace tt
 		c_json(c_json const& other);
 		c_json(std::string const& file_name);
 		bool load(std::string const& file_name);
-		bool is_empty() const;
-		bool is_string() const;
-		bool is_number() const;
-		bool is_number_integer() const;
-		bool is_number_unsigned() const;
-		bool is_number_float() const;
-		size_t size() const;
+		bool is_empty() const { return data.empty(); }
+		bool is_string() const { return data.is_string(); }
+		bool is_number() const { return data.is_number(); }
+		bool is_number_integer() const { return data.is_number_integer(); }
+		bool is_number_unsigned() const { return data.is_number_unsigned(); }
+		bool is_number_float() const { return data.is_number_float(); }
+		bool is_array() const { return data.is_array(); }
+		size_t size() const { return data.size(); }
+
 		c_json operator[](std::string const& key);
 		c_json operator[](size_t index);
 

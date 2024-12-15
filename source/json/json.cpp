@@ -26,14 +26,6 @@ namespace tt
 		return true;
 	}
 
-	bool c_json::is_empty() const { return data.empty(); }
-	bool c_json::is_string() const { return data.is_string(); }
-	bool c_json::is_number() const { return data.is_number(); }
-	bool c_json::is_number_integer() const { return data.is_number_integer(); }
-	bool c_json::is_number_unsigned() const { return data.is_number_unsigned(); }
-	bool c_json::is_number_float() const { return data.is_number_float(); }
-	size_t c_json::size() const { return data.size(); }
-
 	c_json c_json::operator[](std::string const& key)
 	{
 		if (data.is_object())
