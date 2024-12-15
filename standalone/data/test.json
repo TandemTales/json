@@ -1,3 +1,4 @@
 {
-	"boop": "bop"
+	"boop": "bop",
+	"bedoop": ["foo", 2, 3.5]
 }

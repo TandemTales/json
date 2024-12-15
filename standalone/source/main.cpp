@@ -15,8 +15,28 @@ int main()
 		logln("json file test.json failed to load");
 	}
 
-	double bedoop2 = json["bedoop"][2].get<double>();
-	logln("boop: {}, {}, {}", json["bedoop"][0].get<std::string>(), json["bedoop"][1].get<uint64_t>(), json["bedoop"][2].get<double>());
-
+	logln("bedoop size: {}", json["bedoop"].size());
+	for (c_json const& obj : json["bedoop"])
+	{
+		if (obj.is_string())
+		{
+			logln("bedoop: {}", obj.get<std::string>());
+		}
+		else if (obj.is_number())
+		{
+			if (obj.is_number_integer())
+			{
+				logln("bedoop: {}", obj.get<int64_t>());
+			}
+			else if (obj.is_number_unsigned())
+			{
+				logln("bedoop: {}", obj.get<uint64_t>());
+			}
+			else if (obj.is_number_float())
+			{
+				logln("bedoop: {}", obj.get<double>());
+			}
+		}
+	}
 	return 0;
 }
