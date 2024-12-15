@@ -11,6 +11,7 @@ namespace tt
 	public:
 		c_json() {}
 		c_json(nlohmann::json const& other) : data(other) {}
+		c_json(c_json const& other) : data(other.data) {}
 		c_json(std::string const& file_name);
 		bool load(std::string const& file_name);
 		bool is_empty() const { return data.empty(); }
